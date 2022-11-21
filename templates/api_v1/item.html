@@ -2,16 +2,26 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Item</title>
+    <script src="https://js.stripe.com/v3/"></script>
+    <title>Buy Item {{ item.id }}</title>
 </head>
 <body>
-    <div>
+<div style="margin: 5%">
     <h2>{{ item.name }}</h2>
     <p>Description: {{ item.description }}</p>
     <p>Price: ${{ item.price }}</p>
-    <form action="/api_v1/buy/{{ item.pk }}" method="GET">
-      <button type="submit">Buy</button>
-    </form>
+    <button id="buy-button">Buy</button>
 </div>
+    <script type="text/javascript">
+      var stripe = Stripe('pk_test_51LvIc1Fa5lsO0GDsxc0dfUxZ4BwVCD4ZGLO0WHK7EiwH5zCF3BqqQLpgiA9ZdRb8DoxmdMzkeoCtJRazed1J6qwz00yAG0HLhE');
+      var buyButton = document.getElementById('buy-button');
+      buyButton.addEventListener('click', function() {
+          var url = window.location.toString();
+          window.location = url.replace('/item/{{ item.id }}', '/buy/{{ item.id }}');
+          return fetch(url, {method: 'GET'})
+              .then(response => response.json())
+              .then(session => stripe.redirectToCheckout({ sessionId: session.id }))
+      });
+    </script>
 </body>
 </html>
