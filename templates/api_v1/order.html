@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://js.stripe.com/terminal/v1/"></script>
+    <script src="https://js.stripe.com/v3/"></script>
+    <title>Order</title>
+</head>
+<body>
+<div style="margin: 5%">
+    <h2>Order# {{ order.id }}</h2>
+    <p>Products:</p>
+    {% for i in order.items.all %}
+    <p>* {{ i.name }}  ${{ i.price }}</p>
+    {% endfor %}
+    <p>Total: ${{ total_amount }}</p>
+    <button id="buy-button">Buy</button>
+    <script type="text/javascript">
+      var stripe = Stripe('pk_test_51LvIc1Fa5lsO0GDsxc0dfUxZ4BwVCD4ZGLO0WHK7EiwH5zCF3BqqQLpgiA9ZdRb8DoxmdMzkeoCtJRazed1J6qwz00yAG0HLhE');
+      var buyButton = document.getElementById('buy-button');
+      buyButton.addEventListener('click', function() {
+          var url = window.location.toString();
+          window.location = url.replace('/order/{{ order.id }}', '/order/{{ order.id }}/buy');
+          return fetch(url, {method: 'GET'})
+              .then(response => response.json())
+              .then(session => stripe.redirectToCheckout({ sessionId: session.id }))
+      });
+    </script>
+</div>

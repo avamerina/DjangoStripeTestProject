@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Buy Item {{ item.id }}</title>
+</head>
+<body style="margin: 5%">
+<div>
+    <h2>{{ product.name }}</h2>
+    <p>Description: {{ product.description }}</p>
+    <p>Price: ${{ product.price }}</p>
+    <form action="/api_v2/order/create_for/{{ product.pk }}" method="GET">
+        <button type="submit">Buy</button>
+    </form>
+</div>
+</body>
+</html>
