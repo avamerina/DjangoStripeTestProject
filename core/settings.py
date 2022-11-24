@@ -15,19 +15,14 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-DEBUG='True'
-SECRET_KEY='django-insecure-th68nky*c1oz0*w6(!*_1@#_#^pph178(op6b3+_%)e-t8h!wf'
-STRIPE_SECRET_KEY='sk_test_51LvIc1Fa5lsO0GDsOznUyEAm0BqFJ2SxaR3ZNeTtXQeOCgq4LtK6rk2V4sXjDxhJuOFUGXuing5qNIaHL0uDndSe00TjPYGsgO'
-STRIPE_PUBLISHABLE_KEY='pk_test_51LvIc1Fa5lsO0GDsxc0dfUxZ4BwVCD4ZGLO0WHK7EiwH5zCF3BqqQLpgiA9ZdRb8DoxmdMzkeoCtJRazed1J6qwz00yAG0HLhE'
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = os.environ.get('SECRET_KEY')
 #
 # # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = os.environ.get('DEBUG')
+DEBUG = os.environ.get('DEBUG')
 
 ALLOWED_HOSTS = ["*"]
 
@@ -132,4 +127,5 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY')
+STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY')
+STRIPE_PUBLISHABLE_KEY = os.environ.get('STRIPE_PUBLISHABLE_KEY')
